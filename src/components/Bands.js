@@ -1,25 +1,15 @@
-import React from "react";
-import Band from "./Band"
-import { connect } from "react-redux"
-import { render } from "enzyme";
+import React from 'react';
+import Band from './Band'
 
-const Bands = (props) => {
-  const renderBands = () => {
-    props.bands.map((band) => {
-      <Band deleteBand={props.deleteBand} key={band.id} band={band} />
-    })
-  }
+const Bands = props => {
+  const bands = props.bands.map(band => <Band key={band.id} {...band} deleteBand={props.deleteBand}/>)
 
-  console.log(props)
-    return (
-      <div>{renderBands()}</div>
-    )
-}
+  return (
+    <div>
+      {bands}
+    </div>
+  );
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteBand: name => dispatch({type: "DELETE_BAND", name: name})
-  }
-}
+};
 
-export default connect(null, mapDispatchToProps)(Bands)
+export default Bands;

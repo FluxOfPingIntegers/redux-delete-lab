@@ -7,13 +7,13 @@ export default function manageBand(state = {
     case "ADD_BAND":
       const band = {
         id: uuid(), 
-        name: action.payload.name
+        name: action.name
       }
-      return {bands: state.bands.concat(band)};
-    case "DELETE_BAND":
-      return {bands: state.bands.filter((band) => band !== action.payload) };
+      return { ...state, bands: [...state.bands, band] }
+    case 'DELETE_BAND':
+      const bands = state.bands.filter(band => band.id !== action.id);
+      return { bands };
     default:
-      return state
-  
+      return state;
   }
 };
